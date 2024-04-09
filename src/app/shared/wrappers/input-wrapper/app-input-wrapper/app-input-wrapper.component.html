@@ -1,0 +1,4 @@
+<input class="registration-form__input" type="text" [value]="value" (input)="updateValue($event)" />
+<div *ngIf="showError">
+  <div class="error">Неправильные данные</div>
+</div>

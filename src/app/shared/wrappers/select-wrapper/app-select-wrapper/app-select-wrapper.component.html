@@ -1,0 +1,3 @@
+<select class="registration-form__select" (change)="onOptionChange($event.target)">
+  <option *ngFor="let option of options" [value]="option.name" [selected]="selectedOption === option.name">{{ option.name }}</option>
+</select>

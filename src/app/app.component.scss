@@ -1,0 +1,49 @@
+.registration-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.registration-form__group {
+  margin-bottom: 10px;
+}
+
+.registration-form__input,
+.registration-form__select {
+  width: 80%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.registration-form__button {
+  background-color: #575cba;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+.registration-form__add-button {
+  @extend .registration-form__button;
+  width: 13%;
+  margin-left: 10px;
+}
+.registration-form__submit-button {
+  @extend .registration-form__button;
+}
+
+.registration-form__button:hover {
+  background-color: #ce4813;
+}
+
+.isDisabled {
+  display: none;
+}
