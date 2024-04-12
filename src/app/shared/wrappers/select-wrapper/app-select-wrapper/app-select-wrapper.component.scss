@@ -1,4 +1,4 @@
-.registration-form__input {
+.registration-form__select {
   width: 80%;
   padding: 10px;
   margin: 5px 0;
@@ -6,6 +6,6 @@
   border-radius: 4px;
   box-sizing: border-box;
 }
-.error {
-  border: 2px solid red;
+.isDisabled {
+  display: none;
 }

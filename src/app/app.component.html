@@ -2,59 +2,42 @@
   <div class="registration-form__group">
     <label class="registration-form__label">Имя</label><br />
     <app-input-wrapper formControlName="userFirstName"></app-input-wrapper>
-    <!-- <app-validation-message [controlName]="'userFirstName'" [form]="myForm"></app-validation-message> -->
   </div>
 
   <div class="registration-form__group">
     <label class="registration-form__label">Фамилия</label><br />
     <app-input-wrapper formControlName="userLastName"></app-input-wrapper>
-    <app-validation-message [controlName]="'userLastName'" [form]="myForm"></app-validation-message>
   </div>
 
   <div class="registration-form__group">
     <label class="registration-form__label">Email</label><br />
     <app-input-wrapper formControlName="userEmail"></app-input-wrapper>
-    <app-validation-message [controlName]="'userEmail'" [form]="myForm"></app-validation-message>
   </div>
 
   <div class="registration-form__group">
     <label class="registration-form__label">Логин</label><br />
     <app-input-wrapper formControlName="userLogin"></app-input-wrapper>
-    <app-validation-message [controlName]="'userLogin'" [form]="myForm"></app-validation-message>
-  </div>
+  </div> 
 
   <div class="registration-form__group">
     <label class="registration-form__label">Пароль</label><br />
     <app-input-wrapper formControlName="userPassword"></app-input-wrapper>
-    <app-validation-message [controlName]="'userPassword'" [form]="myForm"></app-validation-message>
   </div>
 
   <div class="registration-form__group" formArrayName="userPhones">
     <label class="registration-form__label">Телефон</label><br />
-    <div *ngFor="let phone of userPhonesFormArray; let i = index">
+    <div class="someflex" *ngFor="let phone of userPhonesFormArray; let i = index">
       <app-input-wrapper formControlName="{{ i }}"></app-input-wrapper>
       <button class="registration-form__add-button" *ngIf="i === userPhonesFormArray.length - 1" (click)="addPhone()">+</button>
 
-      <!-- <div *ngIf="phone.get('{{i}}')?.invalid && phone.get('{{i}}')?.touched">Неккоректные данные</div> -->
     </div>
-    <app-validation-message [controlName]="'userPhones'" [form]="myForm"></app-validation-message>
   </div>
 
   <div class="registration-form__group" formArrayName="userLanguages">
     <label class="registration-form__label">Предпочитаемый язык</label><br />
     @for(lang of userLanguagesFormArray; track $index){
     <div>
-      <select
-        class="registration-form__select"
-        formControlName="{{ $index }}"
-        [(ngModel)]="selectedOptions[$index]"
-        (ngModelChange)="isOptionDisabled()"
-      >
-        <option *ngFor="let language of languages" [value]="language.name" [ngClass]="{ isDisabled: language.disabled }">
-          {{ language.name }}
-        </option>
-      </select>
-      <!-- <app-select-wrapper [options]="languages" [(ngModel)]="selectedOptions[$index]" (ngModelChange)="isOptionDisabled()"></app-select-wrapper> -->
+      <app-select-wrapper [options]="languages" formControlName="{{ $index }}"></app-select-wrapper>
       <button class="registration-form__add-button" *ngIf="$last" (click)="addLanguage()">+</button>
     </div>
     }

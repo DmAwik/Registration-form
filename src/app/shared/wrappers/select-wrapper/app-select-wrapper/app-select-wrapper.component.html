@@ -1,3 +1,3 @@
-<select class="registration-form__select" (change)="onOptionChange($event.target)">
-  <option *ngFor="let option of options" [value]="option.name" [selected]="selectedOption === option.name">{{ option.name }}</option>
+<select class="registration-form__select" [formControl]="control">
+  <option *ngFor="let option of options" [value]="option.name" [ngClass]="{ isDisabled: option.disabled }">{{ option.name }}</option>
 </select>

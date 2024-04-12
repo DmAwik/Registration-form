@@ -7,4 +7,3 @@ export const languages: { name: string; disabled: boolean }[] = [
   { name: "Spanish", disabled: false },
 ];
 
-export let selectedOptions: string[] = ["Russian"];

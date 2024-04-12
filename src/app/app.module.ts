@@ -5,11 +5,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppValidationMessageComponent } from "./app-validation-message/app-validation-message.component";
-import { AppInputWrapperComponent } from "./shared/wrappers/input-wrapper/app-input-wrapper/app-input-wrapper.component";
-import { AppSelectWrapperComponent } from "./shared/wrappers/select-wrapper/app-select-wrapper/app-select-wrapper.component";
+import { AppSelectWrapperModule } from "./shared/wrappers/select-wrapper/app-select-wrapper/app-select-wrapper.module";
+import { AppInputWrapperModule } from "./shared/wrappers/input-wrapper/app-input-wrapper/app-input-wrapper.module";
 @NgModule({
-  declarations: [AppComponent, AppValidationMessageComponent, AppInputWrapperComponent, AppSelectWrapperComponent],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
+  declarations: [AppComponent, AppValidationMessageComponent],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule,AppSelectWrapperModule,AppInputWrapperModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })

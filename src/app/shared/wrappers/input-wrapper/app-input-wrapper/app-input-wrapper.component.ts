@@ -1,7 +1,9 @@
-import { Component, Input, forwardRef } from "@angular/core";
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from "@angular/forms";
-import { userFirstNameValidator } from "../../../validators/first-name-validator";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, Input, forwardRef } from "@angular/core";
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ValidationErrors } from "@angular/forms";
+import { untilDestroyed, UntilDestroy } from "@ngneat/until-destroy";
+import { startWith } from "rxjs";
 
+@UntilDestroy()
 @Component({
   selector: "app-input-wrapper",
   templateUrl: "./app-input-wrapper.component.html",
@@ -13,43 +15,52 @@ import { userFirstNameValidator } from "../../../validators/first-name-validator
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppInputWrapperComponent implements ControlValueAccessor {
   @Input() value: string;
-  showError: boolean = false;
-  control: FormControl;
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  public control: FormControl;
+  public ngControl: NgControl;
+  public touched = false;
+  public currentErrors: null | ValidationErrors | undefined = null;
+  public onChange: any = () => {};
+  public onTouched: any = () => {};
 
-  constructor() {}
-  ngOnInit() {
-    this.control = new FormControl("");
-    this.control.setValidators([Validators.required]);
+  constructor(private injector: Injector, private cdr: ChangeDetectorRef) {}
+
+  public ngAfterContentInit(): void {
+    this.ngControl = this.injector.get(NgControl);
+    this.ngControl?.statusChanges.pipe(startWith(this.ngControl?.status), untilDestroyed(this)).subscribe(() => {
+      this.currentErrors = this.ngControl?.control?.errors;
+      this.cdr.markForCheck();
+    });
   }
-  writeValue(value: any): void {
-    this.value = value;
+  public ngOnInit(): void {
+    this.control = new FormControl("");
+    this.control.valueChanges.pipe(untilDestroyed(this)).subscribe(value => {
+      this.onChange(value);
+    });
+  }
+  public writeValue(value: any): void {
     this.control.setValue(value);
   }
+  public ngDoCheck(): void {
+    this.checkTouchedStatus();
+  }
 
-  registerOnChange(fn: any): void {
+  public registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
-
-  setDisabledState?(isDisabled: boolean): void {}
-
-  public updateValue(event: any): void {
-    this.control.setValue(event.target.value);
-    this.showError = this.validateInput();
-    this.onChange(this.control.value);
+  public checkTouchedStatus(): void {
+    this.touched = Boolean(this.ngControl?.control?.touched);
+    this.cdr.markForCheck();
   }
-  private validateInput(): boolean {
-    console.log(this.control.invalid);
-    console.log(this.control.touched);
-
-    return this.control.invalid && this.control.touched;
+  public onBlur(): void {
+    this.onTouched();
   }
+  public setDisabledState?(isDisabled: boolean): void {}
 }
