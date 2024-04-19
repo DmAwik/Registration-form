@@ -4,5 +4,7 @@
   [value]="value"
   [formControl]="control"
   (blur)="onBlur()"
-  [ngClass]="{ error: ngControl?.control?.errors && touched }"
 />
+<span class="error"  *ngIf="ngControl?.control?.errors && touched ">Неправильные данные</span>
+
+

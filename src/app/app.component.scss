@@ -14,17 +14,17 @@
 .registration-form__button {
   background-color: #575cba;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  margin: 5px 0;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  height: 40px;
   width: 100%;
 }
 .registration-form__add-button {
   @extend .registration-form__button;
-  width: 13%;
-  margin-left: 10px;
+  width: 50px;
+  margin-left: 5px;
 }
 .registration-form__submit-button {
   @extend .registration-form__button;
@@ -32,4 +32,11 @@
 
 .registration-form__button:hover {
   background-color: #ce4813;
+}
+.someflex{
+  display: flex;
+  width: 100%;
+}
+.input-wrapper{
+    width: 100%;
 }

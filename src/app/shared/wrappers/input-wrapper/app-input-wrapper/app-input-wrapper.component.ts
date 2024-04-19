@@ -29,9 +29,13 @@ export class AppInputWrapperComponent implements ControlValueAccessor {
   constructor(private injector: Injector, private cdr: ChangeDetectorRef) {}
 
   public ngAfterContentInit(): void {
+    //получаем ссылку на ngcontrol
+    //NgControl - это абстрактный класс, который предоставляет интерфейс для доступа к FormControl,
+    // связанному с элементом управления.
     this.ngControl = this.injector.get(NgControl);
     this.ngControl?.statusChanges.pipe(startWith(this.ngControl?.status), untilDestroyed(this)).subscribe(() => {
       this.currentErrors = this.ngControl?.control?.errors;
+
       this.cdr.markForCheck();
     });
   }
