@@ -35,6 +35,7 @@ export class AppInputWrapperComponent implements ControlValueAccessor {
     this.ngControl = this.injector.get(NgControl);
     this.ngControl?.statusChanges.pipe(startWith(this.ngControl?.status), untilDestroyed(this)).subscribe(() => {
       this.currentErrors = this.ngControl?.control?.errors;
+      console.log(this.currentErrors);
 
       this.cdr.markForCheck();
     });

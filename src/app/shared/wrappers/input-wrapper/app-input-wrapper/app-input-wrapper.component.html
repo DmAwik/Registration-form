@@ -1,10 +1,2 @@
-<input
-  class="registration-form__input"
-  type="text"
-  [value]="value"
-  [formControl]="control"
-  (blur)="onBlur()"
-/>
-<span class="error"  *ngIf="ngControl?.control?.errors && touched ">Неправильные данные</span>
-
-
+<input class="registration-form__input" type="text" [value]="value" [formControl]="control" (blur)="onBlur()" />
+<span class="error" *ngIf="currentErrors && touched"> {{ currentErrors | getError }}</span>

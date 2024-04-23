@@ -26,8 +26,8 @@
 
   <div class="registration-form__group" formArrayName="userPhones">
     <label class="registration-form__label">Телефон</label><br />
-    <div class="someflex" *ngFor="let phone of userPhonesFormArray; let i = index">
-      <app-input-wrapper class="input-wrapper" formControlName="{{ i }}"></app-input-wrapper>
+    <div class="flex-layout-for-cva" *ngFor="let phone of userPhonesFormArray; let i = index">
+      <app-input-wrapper formControlName="{{ i }}"></app-input-wrapper>
       <button class="registration-form__add-button" *ngIf="i === userPhonesFormArray.length - 1" (click)="addPhone()">+</button>
     </div>
   </div>
@@ -35,7 +35,7 @@
   <div class="registration-form__group" formArrayName="userLanguages">
     <label class="registration-form__label">Предпочитаемый язык</label><br />
     @for(lang of userLanguagesFormArray; track $index){
-    <div class="someflex">
+    <div class="flex-layout-for-cva">
       <app-select-wrapper class="input-wrapper" [options]="languages" formControlName="{{ $index }}"></app-select-wrapper>
       <button class="registration-form__add-button" *ngIf="$last" (click)="addLanguage()">+</button>
     </div>

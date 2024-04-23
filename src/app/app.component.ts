@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { languages } from "./shared/constants/form-data-constants";
 import { userEmailPattern, userPhonePattern } from "./shared/constants/patterns";
-import { userFirstNameValidator } from "./shared/validators/first-name-validator";
+import { userNameTrimValidator } from "./shared/validators/user-name-trim-validator";
 
 @Component({
   selector: "app-root",
@@ -17,7 +17,7 @@ export class AppComponent {
   public myForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.myForm = this.formBuilder.group({
-      userFirstName: ["", [Validators.required, userFirstNameValidator]],
+      userFirstName: ["", [Validators.required, userNameTrimValidator]],
       userLastName: ["", Validators.required],
       userEmail: ["", [Validators.required, Validators.pattern(userEmailPattern)]],
       userLogin: ["", Validators.required],
